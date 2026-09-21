@@ -1,0 +1,18 @@
+.DS_Store
+.idea
+.ipynb_checkpoints/
+.vscode
+__pycache__/
+*.pyc
+env/
+venv/
+data/
+cleanup_checklist.txt
+Quantization/TODO.txt
+Quantization/experiment_log.txt
+Quantization/**/output/
+Batch Size vs Inference Speed/**/output/
+Batch Size vs Inference Speed/source_paths.txt
+Batch Size vs Inference Speed/experiment_date.txt
+KV Cache/2_time_estimation_per_token/TODO_std_anomaly.txt
+KV Cache/2_time_estimation_per_token/Graph drawing along the token length/Graph_Drawing.json
