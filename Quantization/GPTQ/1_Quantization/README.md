@@ -6,7 +6,7 @@ a plain `.to(dtype=...)` cast, not a real quantization scheme yet) can be pushed
 before HellaSwag accuracy/NLL and FineWeb-val perplexity/NLL visibly drop, then
 applying actual quantization from whatever point that degradation starts.
 
-This is part of the broader [AI efficiency study](../README.md) in this repository
+This is part of the broader [AI efficiency study](../../../README.md) in this repository
 and is written up in more detail in the accompanying blog post.
 
 **Status: work in progress.** The dtype-precision sweep and the two evaluation
@@ -21,7 +21,7 @@ hasn't been applied yet, and results/conclusions are still being collected.
 using the manual/"math" attention implementation instead of
 `scaled_dot_product_attention`, so the same kernel path is used regardless of
 dtype and results stay comparable across the sweep (same approach as
-[`Memory measurement/`](../Memory%20measurement/README.md)).
+[`Memory measurement/`](../../../Memory%20measurement/README.md)).
 
 dtype is applied directly to the model weights via `model.to(device, dtype=...)`,
 not `torch.autocast` — so parameters and activations run end-to-end in that dtype,
@@ -29,7 +29,7 @@ rather than PyTorch keeping fp32 master weights under the hood.
 
 `hellaswag_evaluation.py`'s scoring logic (load candidates → compute per-candidate
 NLL → pick the argmin) is adapted from the dtype-sweep scripts in
-[`../Kernel investigation/Evaluation/`](../Kernel%20investigation/README.md),
+[`../Kernel investigation/Evaluation/`](../../../Kernel%20investigation/README.md),
 restructured to run one dtype per pass instead of sweeping dtype/batch/padding
 for kernel-selection purposes.
 
@@ -42,10 +42,9 @@ for kernel-selection purposes.
 
 Both scripts warm up with one throwaway batch (the same batch reused as the first
 real one, so shapes/memory allocation are already warmed up) before timing starts,
-then append one row per run to a shared, per-dataset CSV —
-`data/hellaswag_evaluation.csv`, `data/fineweb_evaluation.csv` — recording `dtype`,
+then append one row per run to a shared, per-dataset CSV, recording `dtype`,
 `elapsed_time_sec`, `avg_NLL`, `accuracy` (HellaSwag only), etc. Each run's raw
-per-sample NLLs are also saved to `output/<dataset>_<dtype>_<run_id>.pt`, linked to
+per-sample NLLs are also saved to `output/`, linked to
 its CSV row via `run_id`.
 
 `data/` (HellaSwag val set, FineWeb10B shard) is gitignored, same as the other

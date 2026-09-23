@@ -9,7 +9,7 @@ from datetime import datetime
 import numpy as np
 import argparse
 
-DATA_DIR = "../data"
+DATA_DIR = "../../data"
 OUT_DIR = "./output"
 os.makedirs(OUT_DIR, exist_ok=True)
 

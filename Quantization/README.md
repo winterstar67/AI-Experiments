@@ -42,10 +42,9 @@ for kernel-selection purposes.
 
 Both scripts warm up with one throwaway batch (the same batch reused as the first
 real one, so shapes/memory allocation are already warmed up) before timing starts,
-then append one row per run to a shared, per-dataset CSV —
-`data/hellaswag_evaluation.csv`, `data/fineweb_evaluation.csv` — recording `dtype`,
+then append one row per run to a shared, per-dataset CSV, recording `dtype`,
 `elapsed_time_sec`, `avg_NLL`, `accuracy` (HellaSwag only), etc. Each run's raw
-per-sample NLLs are also saved to `output/<dataset>_<dtype>_<run_id>.pt`, linked to
+per-sample NLLs are also saved to `output/`, linked to
 its CSV row via `run_id`.
 
 `data/` (HellaSwag val set, FineWeb10B shard) is gitignored, same as the other

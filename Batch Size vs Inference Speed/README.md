@@ -2,7 +2,7 @@
 
 Investigates whether `batch_size` actually affects nanoGPT's GPT-2 *pure forward*
 inference speed on a single GPU. This was motivated by an unexpected finding while
-building GPTQ quantization ([`Quantization/1_Quantization/GPTQ_Quantization.py`](../Quantization/README.md)):
+building GPTQ quantization ([`Quantization/GPTQ/1_Quantization/GPTQ_Quantization.py`](../Quantization/README.md)):
 `batch_size=1` and `batch_size=64` showed no meaningful difference in per-sample
 forward time. This project isolates that question and re-measures it directly (no
 GPTQ hooks, no calibration), at two levels of detail — the whole model, and just
@@ -68,7 +68,7 @@ was written with Claude.
 Both scripts time only the `model()` call itself via `torch.cuda.Event`, with
 **no `torch.profiler` wrapping the timed loop** — an earlier version of this
 methodology (traced back to `Kernel investigation/`, then reused in `KV Cache/`
-and `Quantization/0_Performance_Baseline/`) always ran a profiler around the
+and `Quantization/GPTQ/0_Performance_Baseline/`) always ran a profiler around the
 measurement loop, which inflates and destabilizes the very timing being measured.
 `first_layer_estimation.py` still supports an optional, deliberately-isolated
 Perfetto trace (`torch.profiler`, one export per `batch_size`, only on the last

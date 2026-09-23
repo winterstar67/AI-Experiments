@@ -10,7 +10,7 @@ import numpy as np
 import argparse
 import torch.nn as nn
 
-DATA_DIR = "../data"
+DATA_DIR = "../../data"
 OUT_DIR = "./output"
 os.makedirs(OUT_DIR, exist_ok=True)
 
